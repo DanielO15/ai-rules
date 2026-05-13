@@ -48,7 +48,12 @@ Once all steps are complete:
 - Sanity-check that the implementation still matches the plan
 - Fix any issues found
 
-## Step 5: Launch ship loop
+## Step 5: Generate tests
+
+For each new or significantly changed function, run `/gen-tests <function name>`.
+Skip this step only if the change is purely config, docs, or a trivial one-liner with no logic.
+
+## Step 6: Launch ship loop
 
 Run `/flow:ship-loop`.
 

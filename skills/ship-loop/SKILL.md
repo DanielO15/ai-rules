@@ -18,6 +18,12 @@ Run `/flow:pr` to create the draft pull request.
 
 Run `/flow:review-loop` to iteratively review and fix the PR until it is ready.
 
+## Step 4: Remind to reflect
+
+Once the PR is open and the review loop is complete, tell the user:
+
+"Once your PR is merged, run `/reflect` to log what you learned and add it to your Coda journal."
+
 ## Important rules
 
 - This command is an orchestrator. Keep progress updates concise.
