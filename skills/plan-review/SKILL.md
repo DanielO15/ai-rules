@@ -67,7 +67,9 @@ If critical issues remain, fix them in the plan file or report them clearly.
 
 ## Step 7: Hand off
 
-Tell the user the exact filename to pass into `/flow:implement`.
+Display the final plan in full in the chat so the user can read it without opening a file.
+
+Then tell the user the exact filename to pass into `/flow:implement`.
 Recommend they run `/clear` before `/flow:implement` — the plan file is the contract, and a fresh context catches any gaps in what the plan actually specifies.
 
 ## Important rules

@@ -38,11 +38,10 @@ Display a short summary of what you found:
 - Ticket title and description
 - Any files that look relevant based on the title and description keywords
 
-Then — before offering any solutions, plans, or opinions — ask the user exactly these three questions:
+Then — before offering any solutions, plans, or opinions — ask the user exactly these two questions:
 
 1. **What's your rough approach?** Even two sentences is enough.
 2. **What part feels most uncertain?** The bit you'd Google first, or haven't done before.
-3. **What existing code do you think you'll be touching?** File names or functions — a guess is fine.
 
 Do NOT suggest a plan, write code, or explain how to solve it. Stop and wait for answers.
 
@@ -59,11 +58,11 @@ You are not planning yet. You are making sure they walk in with the right mental
 
 ## Step 5: Hand off
 
-Ask the user to draft their plan now — in plain English, in this chat. Tell them:
+Ask the user to draft their plan now — in plain English, directly in this chat. Tell them:
 
-"Now draft your plan — rough is fine, even 4–5 bullet points. Once you've written it, I'll run `/flow:plan-review` to stress-test it before you touch any code."
+"Now write your plan here — rough is fine, even 4–5 bullet points. Don't open a separate doc, just type it out. Once you're done I'll stress-test it."
 
-Wait for the plan. When they share it, run `/flow:plan-review` with it.
+Wait for the plan. When they share it, critique it inline in chat — point out gaps, wrong assumptions, missing edge cases. Keep feedback tight. Then confirm it's ready before they move to `/flow:implement`.
 
 ## Important rules
 

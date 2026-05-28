@@ -26,18 +26,20 @@ Before making any changes:
 
 ## Step 3: Implement step by step
 
-Follow the plan in order.
+Follow the plan in order, one step at a time.
 
 For each step:
 
-1. Implement the changes described
-2. Run the smallest relevant validation you can:
+1. Before starting, tell the user: "**Starting step X: <step title>**" so they know what's happening
+2. Implement the changes described
+3. Run the smallest relevant validation you can:
    - targeted lint/typecheck/test when possible
    - broader checks only when necessary
-3. Commit with a descriptive message referencing the step
+4. Commit with a descriptive message referencing the step
    - example: `feat: step 2 — add user validation endpoint`
+5. After committing, summarise what you just did in 2-3 sentences and ask: "**Step X done. Any questions before I move to step X+1?**" — then STOP and wait for the user to confirm before proceeding.
 
-Do NOT batch the whole plan into one big commit.
+Do NOT batch the whole plan into one big commit. Do NOT move to the next step without explicit confirmation.
 
 ## Step 4: Final verification
 
