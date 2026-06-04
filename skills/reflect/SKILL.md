@@ -49,16 +49,35 @@ curl -s -X POST "https://coda.io/apis/v1/docs/dq40E_aj_jM/tables/tu7nGIdd/rows" 
   }'
 ```
 
-Format the Entry value as:
+Format the Entry value using Coda-compatible markdown. Coda renders standard markdown in canvas/rich text columns — use `**bold**` for headers, ` ``` ` fenced blocks for code, and blank lines between sections.
+
+Structure the entry as follows:
+
+---
 
 **What I built**
 1–2 sentences on what the ticket was and what you shipped.
 
 **What I learned**
-The user's answers to the reflection questions, written up as clear prose. Don't flatten nuance — if they were uncertain about something and now understand it, say that explicitly.
+The user's answers to the reflection questions, written as clear prose. Don't flatten nuance — if they were uncertain about something and now understand it, say that explicitly.
+
+Where a concept is best illustrated with code, include a short excerpt as a teaching moment. For example, if the user learned how a middleware is wired up, show the relevant 3–5 lines. Format it as a fenced code block with the language specified:
+
+\`\`\`typescript
+// example
+\`\`\`
+
+Keep excerpts short and annotated — the point is to jog memory, not reproduce the whole diff.
 
 **Impact**
 1 sentence framing the work in terms of outcome, not output. "Reduced incorrect cohort announcements reaching users" not "fixed a bug in the cohort logic." This is the brag-bucket line.
+
+---
+
+When building the JSON payload for the curl request, make sure the Entry value:
+- Uses `\n` for newlines within the JSON string
+- Uses `\`\`\`` for fenced code blocks (escape the backticks properly in the shell string)
+- Does not use HTML — Coda renders markdown, not HTML
 
 If `$CODA_API_TOKEN` is not set, tell the user and print the formatted entry so they can paste it manually.
 If the API call fails, print the formatted entry and the error.
