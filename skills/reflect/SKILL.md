@@ -1,6 +1,6 @@
 ---
 name: reflect
-description: Reflect on a completed ticket and write a learning entry to Coda. Use when the user runs `/reflect` or says "PR is merged", "ticket is done", "let's reflect". Run this after the PR is merged.
+description: Reflect on a completed ticket and write a learning entry to Google Docs. Use when the user runs `/reflect` or says "PR is merged", "ticket is done", "let's reflect". Run this after the PR is merged.
 user-invocable: true
 ---
 
@@ -31,64 +31,50 @@ Do NOT ask generic questions like "what did you learn?" or "what would you do di
 
 Show the questions to the user and wait for their answers. Tell them: "Take a few minutes — these go into your learning journal and your promotion case."
 
-## Step 3: Write the Coda entry
+## Step 3: Write the Google Doc entry
 
-Once the user has answered, write a new row to their Coda tickets table:
+Once the user has answered, create a new Google Doc in the learning journal folder using the Google Drive MCP:
 
-```bash
-curl -s -X POST "https://coda.io/apis/v1/docs/dq40E_aj_jM/tables/tu7nGIdd/rows" \
-  -H "Authorization: Bearer $CODA_API_TOKEN" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "rows": [{
-      "cells": [
-        { "column": "Name", "value": "<ticket title>" },
-        { "column": "Entry", "value": "<formatted entry — see below>" }
-      ]
-    }]
-  }'
+```
+mcp__23ea1b00-2274-41e2-975d-e1f4dcf9ffc2__create_file({
+  title: "<ticket title>",
+  parentId: "1U89WfrwsYPyS-GX8Rq0MPnZvCOaj0God",
+  textContent: "<formatted entry — see below>",
+  contentMimeType: "text/plain"
+})
 ```
 
-Format the Entry value using Coda-compatible markdown. Coda renders standard markdown in canvas/rich text columns — use `**bold**` for headers, ` ``` ` fenced blocks for code, and blank lines between sections.
+This will create a Google Doc (Drive auto-converts plain text to a Doc). Use the ticket title as the document title.
 
-Structure the entry as follows:
-
----
-
-**What I built**
-1–2 sentences on what the ticket was and what you shipped.
-
-**What I learned**
-The user's answers to the reflection questions, written as clear prose. Don't flatten nuance — if they were uncertain about something and now understand it, say that explicitly.
-
-Where a concept is best illustrated with code, include a short excerpt as a teaching moment. For example, if the user learned how a middleware is wired up, show the relevant 3–5 lines. Format it as a fenced code block with the language specified:
-
-\`\`\`typescript
-// example
-\`\`\`
-
-Keep excerpts short and annotated — the point is to jog memory, not reproduce the whole diff.
-
-**Impact**
-1 sentence framing the work in terms of outcome, not output. "Reduced incorrect cohort announcements reaching users" not "fixed a bug in the cohort logic." This is the brag-bucket line.
+Format the entry as follows — use plain text with clear section headers since Drive will convert it to a Doc:
 
 ---
 
-When building the JSON payload for the curl request, make sure the Entry value:
-- Uses `\n` for newlines within the JSON string
-- Uses `\`\`\`` for fenced code blocks (escape the backticks properly in the shell string)
-- Does not use HTML — Coda renders markdown, not HTML
+WHAT I BUILT
+<1–2 sentences on what the ticket was and what you shipped.>
 
-If `$CODA_API_TOKEN` is not set, tell the user and print the formatted entry so they can paste it manually.
-If the API call fails, print the formatted entry and the error.
+WHAT I LEARNED
+<The user's answers to the reflection questions, written as clear prose. Don't flatten nuance — if they were uncertain about something and now understand it, say that explicitly.>
+
+Where a concept is best illustrated with code, include a short excerpt as a teaching moment. Show the relevant 3–5 lines with a brief comment explaining what it demonstrates. Keep excerpts short — the point is to jog memory, not reproduce the whole diff.
+
+CONCEPTS COVERED
+<Any architectural patterns, system design decisions, or codebase conventions that came up — even if you didn't write the code yourself. These are the transferable bits: how the event pipeline is structured, how tracing is wired up, how feature flags are managed, how services communicate. 1–3 bullets. Skip this section if nothing beyond the immediate code came up.>
+
+IMPACT
+<1 sentence framing the work in terms of outcome, not output. "Reduced incorrect cohort announcements reaching users" not "fixed a bug in the cohort logic." This is the brag-bucket line.>
+
+---
+
+If the MCP call fails, print the formatted entry so the user can paste it manually and report the error.
 
 ## Step 4: Close out
 
-Tell the user the entry is written. Then ask: "Anything else worth noting before you close this out?"
+Tell the user the doc has been created and share the link if returned by the MCP. Then ask: "Anything else worth noting before you close this out?"
 
 ## Important rules
 
 - Questions must be derived from this specific session — not generic
-- Wait for answers before writing to Coda
+- Wait for answers before writing the doc
 - The Impact line must be outcome-framed, not task-framed — push back if the user gives you a task description
 - Do NOT summarise the whole conversation unprompted — only surface what's genuinely useful for reflection
