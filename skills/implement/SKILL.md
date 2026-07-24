@@ -4,13 +4,14 @@ description: Execute an approved plan step by step, with small commits and targe
 user-invocable: true
 ---
 
-Read the plan from the file specified by the user: `$ARGUMENTS`. If no argument was provided, look for `.md` files in `.claude/plans/` and ask the user which one to use if there are multiple.
-
 Do the following sequentially. After each step, report what you did.
 
 ## Step 1: Read and understand the plan
 
-Read `$ARGUMENTS`.
+Use the confirmed plan from this conversation — it will be the numbered list agreed at the end of `/flow:orient`. If no plan is visible in the conversation and no file was passed as `$ARGUMENTS`, ask the user to paste the plan before proceeding.
+
+Print the full plan as a numbered list so the user can see exactly what will be executed.
+
 If the plan is ambiguous or clearly wrong based on the codebase, stop and ask the user before proceeding.
 
 ## Step 2: Pre-flight checks
@@ -30,14 +31,14 @@ Follow the plan in order, one step at a time.
 
 For each step:
 
-1. Before starting, tell the user: "**Starting step X: <step title>**" so they know what's happening
+1. Before starting, reprint the plan with completed steps marked ✓ and the current step marked →
 2. Implement the changes described
 3. Run the smallest relevant validation you can:
    - targeted lint/typecheck/test when possible
    - broader checks only when necessary
 4. Commit with a descriptive message referencing the step
    - example: `feat: step 2 — add user validation endpoint`
-5. After committing, summarise what you just did in 2-3 sentences and ask: "**Step X done. Any questions before I move to step X+1?**" — then STOP and wait for the user to confirm before proceeding.
+5. After committing, summarise what you just did in 2-3 sentences, then reprint the plan again with the just-completed step marked ✓ and ask: "Any questions before I move to the next step?" — then STOP and wait for confirmation before proceeding.
 
 Do NOT batch the whole plan into one big commit. Do NOT move to the next step without explicit confirmation.
 

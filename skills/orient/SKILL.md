@@ -45,28 +45,27 @@ Then — before offering any solutions, plans, or opinions — ask the user exac
 
 Do NOT suggest a plan, write code, or explain how to solve it. Stop and wait for answers.
 
-## Step 4: Orient and surface gotchas
+## Step 4: Convert answers into a draft plan
 
-Once the user has answered all three, do the following — keep it to 5-6 bullets max:
+Take the user's answers and do the following in one response:
 
 1. Validate or gently correct their approach based on the actual codebase
 2. Point to specific files/patterns they should follow
-3. Flag gotchas — naming conventions, existing abstractions, env var patterns, anything that will bite them if missed
-4. Confirm the scope matches the ticket, or flag if the ticket seems broader/narrower than their plan
+3. Flag any gotchas — naming conventions, existing abstractions, anything that will bite them
+4. Using their answers as the basis, produce a draft implementation plan as a numbered list — do not ask them to write one themselves, their answers already contain it
 
-You are not planning yet. You are making sure they walk in with the right mental model.
+Keep the plan concrete: each step should be a single actionable thing (e.g. "Add X to Y file", "Update Z function to handle Q"). Aim for 4–7 steps.
 
-## Step 5: Hand off
+Then ask: "Does this look right? Adjust anything before we start implementing."
 
-Ask the user to draft their plan now — in plain English, directly in this chat. Tell them:
+Wait for confirmation or adjustments. If they change something, reprint the updated plan. Once confirmed, tell them: "Run `/flow:implement` when you're ready."
 
-"Now write your plan here — rough is fine, even 4–5 bullet points. Don't open a separate doc, just type it out. Once you're done I'll stress-test it."
-
-Wait for the plan. When they share it, critique it inline in chat — point out gaps, wrong assumptions, missing edge cases. Keep feedback tight. Then confirm it's ready before they move to `/flow:implement`.
+Do NOT ask the user to write a plan — derive it from their answers. Do NOT save to a file or create an artifact. Keep everything in this chat.
 
 ## Important rules
 
 - Do NOT write code in this skill
-- Do NOT propose a full solution or implementation steps
-- Ask the three questions in Step 3 and WAIT for answers before proceeding to Step 4
-- If the user skips the questions and asks you to just build it, say: "The point of orient is to make sure you understand it first — what's your rough approach?" and wait
+- Do NOT ask the user to write a plan — build it from their answers in Step 3
+- Do NOT create artifacts, open files, or save plans — chat only
+- Ask the two questions in Step 3 and WAIT for answers before proceeding to Step 4
+- If the user skips the questions and asks you to just build it, say: "What's your rough approach?" and wait
