@@ -12,7 +12,7 @@ Read back through this conversation and note:
 
 - What the ticket was and what was built
 - Anything the user said they were uncertain about or didn't understand
-- Concepts, patterns, or tools that came up for the first time or needed explaining or just key concepts to understand as a software developer
+- Concepts, patterns, or tools that came up for the first time or needed explaining, or just key concepts to understand as a software developer
 - Any mistakes, wrong turns, or things that took longer than expected
 - What the plan was and whether reality matched it
 
@@ -37,16 +37,18 @@ Once the user has answered, create a new Google Doc using the Google Drive MCP:
 
 ```
 mcp__23ea1b00-2274-41e2-975d-e1f4dcf9ffc2__create_file({
-  title: "<ticket title>",
+  title: "<document title>",
   parentId: "1m1lu4meJsf_vwAQtjUV6Z0zJYvEy9157",
   textContent: "<formatted entry>",
   contentMimeType: "text/plain"
 })
 ```
 
-IMPORTANT: `parentId` must be `1m1lu4meJsf_vwAQtjUV6Z0zJYvEy9157` — the Engineering Journal folder itself. Do NOT use the old "Promo Highlights" subfolder id (`1U89WfrwsYPyS-GX8Rq0MPnZvCOaj0God`) — that subfolder is retired and nothing reads from it. Entries created there are invisible to both the Journal Viewer artifact and the scheduled coach-debrief task, which only scan direct children of the main folder.
+**IMPORTANT:** `parentId` must be `1m1lu4meJsf_vwAQtjUV6Z0zJYvEy9157` — the Engineering Journal folder itself. Do NOT use the old "Promo Highlights" subfolder id (`1U89WfrwsYPyS-GX8Rq0MPnZvCOaj0God`) — that subfolder is retired and nothing reads from it. Entries created there are invisible to both the Journal Viewer artifact and the scheduled coach-debrief task, which only scan direct children of the main folder.
 
-Use the ticket title as the document title. Format the entry as plain text — Drive auto-converts it to a Google Doc:
+Title the document as `[repo-name] <ticket title>` — e.g. `[atlas-brain] ATLAS-3769 — Debugging the first atlas-brain demo deploy`. The `[repo-name]` prefix is the actual git repo the work happened in, not the Linear/Jira ticket-key prefix — they're often different (ticket key "ATLAS" vs. repo "atlas-brain" is a real example of this). If a ticket touches more than one repo, use the primary one. This bracket tag is the only reliable signal the Journal Viewer artifact has for its repo filter — without it, the viewer has to guess from the ticket key and gets it wrong whenever the two names diverge. If you genuinely don't know the repo, omit the bracket rather than guessing.
+
+Format the entry as plain text — Drive auto-converts it to a Google Doc:
 
 ---
 
@@ -59,6 +61,9 @@ The user's answers written as clear prose. Don't flatten nuance. Where a concept
 CONCEPTS COVERED
 Architectural patterns, system design decisions, or codebase conventions that came up — even if you didn't write the code. E.g. how the event pipeline is structured, how tracing is wired up, how feature flags are managed. 1–3 bullets. Skip if nothing beyond the immediate code came up.
 
+GROWTH AREAS
+Contextually include this section only when there is enough evidence to write about specific high-value areas in which engineering muscles were flexed. Not required every time.
+
 IMPACT
 Max 3 sentences framing the work as outcome, not output. "Reduced incorrect cohort announcements reaching users" not "fixed a bug in the cohort logic." This is the brag-bucket line.
 
@@ -68,7 +73,7 @@ If the MCP call fails, print the formatted entry so the user can paste it manual
 
 ## Step 4: Close out
 
-Tell the user the doc has been created and share the link if returned by the MCP. Mention, briefly, that this entry now feeds two things automatically — no action needed from them:
+Tell the user the doc has been created and share the link if returned by the MCP. Mention briefly that this entry now feeds two things automatically — no action needed from them:
 
 - The Journal Viewer artifact (Cowork sidebar) will show it live next time it's opened.
 - The Mon/Wed/Fri coach-debrief task will read it and, if it clears the promotion bar, fold it into the Brag Doc artifact on its own.
