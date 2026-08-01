@@ -33,14 +33,43 @@ For each step:
 
 1. Before starting, reprint the plan with completed steps marked ✓ and the current step marked →
 2. Implement the changes described
-3. Run the smallest relevant validation you can:
+3. Before committing, show the code context using the template below
+4. Run the smallest relevant validation you can:
    - targeted lint/typecheck/test when possible
    - broader checks only when necessary
-4. Commit with a descriptive message referencing the step
+5. Commit with a descriptive message referencing the step
    - example: `feat: step 2 — add user validation endpoint`
-5. After committing, summarise what you just did in 2-3 sentences, then reprint the plan again with the just-completed step marked ✓ and ask: "Any questions before I move to the next step?" — then STOP and wait for confirmation before proceeding.
+6. Reprint the plan with the just-completed step marked ✓ and ask: "Any questions before I move to the next step?" — then STOP and wait for confirmation before proceeding.
 
 Do NOT batch the whole plan into one big commit. Do NOT move to the next step without explicit confirmation.
+
+### Code context template (before each commit)
+
+```
+### Step N: [step name]
+
+**Code written:**
+[Read the modified file(s) and show the actual lines — the complete function or key snippet, with 1-2 lines of surrounding context. Use the correct language tag.]
+
+**What it does:**
+[2-3 sentences. Be direct and technical — assume the reader knows the domain.]
+
+**Why it's solved this way:**
+[1-2 sentences on the constraint or design decision that drove this approach. E.g. "This lives in the middleware because auth state is immutable by the time it reaches route handlers."]
+
+**Related code:**
+- [function/file]: [why this relationship matters]
+- [function/file]: [why this relationship matters]
+```
+
+### When to skip code context
+
+Skip for:
+- Pure config/YAML changes — just describe what was added
+- Trivial one-liners or variable renames
+- Deletions with no new logic
+
+Still show code for anything with logic, even if it's small.
 
 ## Step 4: Final verification
 
