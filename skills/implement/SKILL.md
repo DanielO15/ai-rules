@@ -37,11 +37,11 @@ For each step:
 4. Run the smallest relevant validation you can:
    - targeted lint/typecheck/test when possible
    - broader checks only when necessary
-5. Commit with a descriptive message referencing the step
-   - example: `feat: step 2 — add user validation endpoint`
-6. Reprint the plan with the just-completed step marked ✓ and ask: "Any questions before I move to the next step?" — then STOP and wait for confirmation before proceeding.
+5. Show the code context template, then tell the user: "I've made the changes — take a look in your editor and come back when you're happy." STOP and wait.
+6. Only commit once the user confirms in chat (e.g. "looks good", "okay", "commit it"). Do NOT commit before receiving explicit confirmation.
+7. After committing, reprint the plan with the just-completed step marked ✓ and ask: "Any questions before I move to the next step?" — then STOP and wait for confirmation before proceeding.
 
-Do NOT batch the whole plan into one big commit. Do NOT move to the next step without explicit confirmation.
+Do NOT batch the whole plan into one big commit. Do NOT commit without explicit user confirmation in chat. Do NOT move to the next step without explicit confirmation.
 
 ### Code context template (before each commit)
 
