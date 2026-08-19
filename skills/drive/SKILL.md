@@ -29,22 +29,27 @@ Work through the plan one step at a time. For each step:
 
 ### 3a. Mini-plan
 
-Show only the current step. Then give a mini-plan for it — not instructions for what to type, but a breakdown of what this step involves and how to think about it:
+Show only the current step. Then give a mini-plan framed in terms of patterns and data flow — not instructions for what to type, but a breakdown of what this step involves and how to think about it:
 
-- **What this step is doing** — the purpose, not the implementation. E.g. "we're wiring the new service into the dependency graph so other modules can use it."
-- **How to approach it** — the shape of the solution at a conceptual level. E.g. "you'll need to register it similarly to how other services are registered, then make it injectable."
-- **Where to look** — point to 1-2 existing files or functions in the codebase that follow the same pattern. Name them specifically.
+- **What this step is doing** — the purpose, framed as a pattern or data flow. E.g. "we're taking an event that originates in X, routing it through the pipeline, and making it available to Y — this is the same producer/consumer pattern you'll see in Z."
+- **How the data moves** — where does data come in, what shape is it in, what happens to it, where does it go out? Trace the flow explicitly so it's easy to reason about.
+- **How to approach it** — the conceptual shape of the solution. Point to the pattern it follows.
+- **Where to look** — 1-2 existing files or functions that use the same pattern. Name them specifically.
 - **Things to think about** — questions worth asking yourself before writing: "what happens if X is null?", "should this be synchronous or async given how the caller uses it?"
+- **Simplification check** — if this step touches a large portion of a file or section, pause and ask: "is there anything here that could be simplified, made easier to read, or consolidated before I add to it?" Changes that improve the surrounding code's clarity are fair game — the goal is to leave the file easier to digest and maintain than you found it, not just to bolt new logic on.
 
 End with: "Take a look at those files, have a think, and ask me anything before you start writing."
 
 ### 3b. Q&A
 
-The user may ask questions before or while writing. Answer in patterns, not code:
+The user may ask questions before or while writing. Answer in terms of patterns and data flow:
 
-- Point to where the pattern already exists in the codebase
-- Explain the concept or constraint behind it
+- Name the pattern at play — "this is a middleware pattern", "this is a transformation in the pipeline", "this is where the data is being normalised before it fans out"
+- Trace the data flow when it helps — "X comes in here, gets shaped into Y, and then Z consumes it downstream"
+- Point to where the same pattern exists in the codebase
 - Ask a question back if it helps them work it out themselves
+
+The goal is that the user can explain what their code is doing clearly and coherently — not just that it works. Use language they can adopt.
 
 Default to NOT writing code. If you reference a snippet from the codebase to illustrate a point, keep it short and frame it as "this is what the existing pattern looks like" not "here's what yours should be."
 
@@ -59,7 +64,7 @@ When the user says they're done, read the file they changed and review it:
 3. **Codebase fit** — does it follow the patterns you pointed them to?
 4. **Understanding** — flag anything worth pausing on as a learning moment, good or bad
 
-Be direct. If something needs changing, say what and why. If it's right, say so and explain briefly what made it work.
+Be direct. If something needs changing, say what and why. If it's right, say so — and explain it in terms of the pattern it follows and where the data flows, so the user can articulate it themselves. The goal is that they could describe this code to another engineer clearly and confidently.
 
 Readability issues are not optional feedback — if a name is misleading, logic is hard to follow, or a future engineer would have to stop and think, flag it and ask for a revision before moving on.
 
@@ -84,3 +89,4 @@ Then tell the user: "All steps done. Run `/flow:gen-tests` for any new functions
 - Do NOT pre-empt what their code should look like before they write it
 - Show only the current step — do not preview upcoming steps unless asked
 - Readability is non-negotiable — any engineer should be able to read the changes and understand them without context. Do not pass code that fails this bar, regardless of whether it works
+- Always frame explanations in terms of patterns and data flow — the user should leave each step able to describe what their code does, why it's structured that way, and how data moves through it
