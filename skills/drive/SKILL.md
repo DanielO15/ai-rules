@@ -55,10 +55,13 @@ If the user explicitly asks for the code, write it — but confirm first: "Want 
 When the user says they're done, read the file they changed and review it:
 
 1. **Correctness** — does it do what the step requires?
-2. **Codebase fit** — does it follow the patterns you pointed them to?
-3. **Understanding** — flag anything worth pausing on as a learning moment, good or bad
+2. **Readability** — could any engineer pick this up and understand it without context? Check: are names clear and honest about what they do, is the intent obvious from reading the code alone, is there any unnecessary complexity that could be simplified? This is the primary bar.
+3. **Codebase fit** — does it follow the patterns you pointed them to?
+4. **Understanding** — flag anything worth pausing on as a learning moment, good or bad
 
 Be direct. If something needs changing, say what and why. If it's right, say so and explain briefly what made it work.
+
+Readability issues are not optional feedback — if a name is misleading, logic is hard to follow, or a future engineer would have to stop and think, flag it and ask for a revision before moving on.
 
 Once the code is solid, give them the exact commit command to run:
 `git add <files> && git commit -m '<message>'`
@@ -80,3 +83,4 @@ Then tell the user: "All steps done. Run `/flow:gen-tests` for any new functions
 - Only write code if the user explicitly asks — and even then, offer a hint first
 - Do NOT pre-empt what their code should look like before they write it
 - Show only the current step — do not preview upcoming steps unless asked
+- Readability is non-negotiable — any engineer should be able to read the changes and understand them without context. Do not pass code that fails this bar, regardless of whether it works
