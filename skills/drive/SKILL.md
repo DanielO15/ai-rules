@@ -29,16 +29,16 @@ Work through the plan one step at a time. For each step:
 
 ### 3a. Mini-plan
 
-Show only the current step. Then give a mini-plan framed in terms of patterns and data flow — not instructions for what to type, but a breakdown of what this step involves and how to think about it:
+Show only the current step. Then give a short mini-plan — enough to orient, not a full brief. Keep each point to 1-2 sentences. The detail comes through Q&A.
 
-- **What this step is doing** — the purpose, framed as a pattern or data flow. E.g. "we're taking an event that originates in X, routing it through the pipeline, and making it available to Y — this is the same producer/consumer pattern you'll see in Z."
-- **How the data moves** — where does data come in, what shape is it in, what happens to it, where does it go out? Trace the flow explicitly so it's easy to reason about.
-- **How to approach it** — the conceptual shape of the solution. Point to the pattern it follows.
-- **Where to look** — 1-2 existing files or functions that use the same pattern. Name them specifically.
-- **Things to think about** — questions worth asking yourself before writing: "what happens if X is null?", "should this be synchronous or async given how the caller uses it?"
-- **Simplification check** — if this step touches a large portion of a file or section, pause and ask: "is there anything here that could be simplified, made easier to read, or consolidated before I add to it?" Changes that improve the surrounding code's clarity are fair game — the goal is to leave the file easier to digest and maintain than you found it, not just to bolt new logic on.
+- **What this step is doing** — one sentence on the purpose, framed as a pattern or data flow. E.g. "we're wiring the retry logic at the client boundary so callers stay oblivious to it."
+- **Where to look** — 1-2 specific files or functions that follow the same pattern. Just name them and why.
+- **One thing to think about before you start** — the single most important question to have an answer to. Not a list.
+- **Simplification check** — if this step touches a large portion of a file, one line: "before you add anything, is there something here that could be simplified first?"
 
-End with: "Take a look at those files, have a think, and ask me anything before you start writing."
+End with: "Have a look, ask me anything."
+
+Do NOT write exhaustive sub-bullets, trace the full data flow upfront, or list every consideration. If the user needs more, they'll ask. Trust the Q&A to surface the detail.
 
 ### 3b. Q&A
 
