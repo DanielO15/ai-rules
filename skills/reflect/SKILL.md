@@ -15,6 +15,7 @@ Read back through this conversation and note:
 - Concepts, patterns, or tools that came up for the first time or needed explaining, or just key concepts to understand as a software developer
 - Any mistakes, wrong turns, or things that took longer than expected
 - What the plan was and whether reality matched it
+- If the session used `/flow:drive`, how each step was broken into chunks — the lowest level things got split to, which chunks needed re-splitting (a friction signal — the user had a question), and how the recap stitched them back together. A step with real friction and a clean recap is exactly the material reflection wants: it shows the gap between "broken down" and "understood."
 
 Also check for a plan file in `.claude/plans/` — read it if one exists.
 
@@ -26,6 +27,9 @@ Examples:
 - If the user was confused about how the auth middleware works: "You weren't sure how the middleware chain worked when you started — how would you explain it now?"
 - If a plan step had to be revised: "The plan changed when you hit X — what did that tell you about how you'd approached the problem?"
 - If a new pattern or library was used: "You hadn't used Y before — what's your mental model of it now?"
+- If a step's chunks had to shrink partway through: "Step 3 started as one chunk but split into three once you hit the IAM policy piece — what made that harder to reason about at the first size, and how would you explain it now that it's built back up into the full step?"
+
+If a step had chunk friction, that step outranks other candidates for a question — ask about its rebuild (chunk → friction → recap → step) before moving on to less-friction-y material.
 
 Do NOT ask generic questions like "what did you learn?" unless nothing more specific applies.
 
