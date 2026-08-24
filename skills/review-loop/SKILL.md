@@ -93,3 +93,4 @@ Once review iterations have settled with no blocking issues:
 - If blocking issues remain after 5 iterations, stop and summarize what remains unresolved.
 - Never mark the PR ready while CI is failing.
 - Never mark a Multiverse repo PR ready — leave it as draft for manual review.
+- Any status update or summary shown to the user leads with one plain sentence before detail — same gist-first format as `/flow:review-pr`.

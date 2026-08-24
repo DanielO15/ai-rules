@@ -31,7 +31,7 @@ Follow the plan in order, one step at a time.
 
 For each step:
 
-1. Before starting, reprint the plan with completed steps marked ✓ and the current step marked →
+1. Before starting, show a compact progress line — e.g. "Step 3/7 — <title>" — not a full plan reprint. Reprint the full plan only if the user asks for it.
 2. Implement the changes described
 3. Before committing, show the code context using the template below
 4. Run the smallest relevant validation you can:
@@ -39,11 +39,13 @@ For each step:
    - broader checks only when necessary
 5. Show the code context template, then tell the user: "I've made the changes — take a look in your editor and come back when you're happy." STOP and wait.
 6. Only commit once the user confirms in chat (e.g. "looks good", "okay", "commit it"). Do NOT commit before receiving explicit confirmation.
-7. After committing, reprint the plan with the just-completed step marked ✓ and ask: "Any questions before I move to the next step?" — then STOP and wait for confirmation before proceeding.
+7. After committing, show a compact progress line marking the step done — e.g. "✓ 3/7 done, next: Step 4 — <title>" — and ask: "Any questions before I move to the next step?" — then STOP and wait for confirmation before proceeding.
 
 Do NOT batch the whole plan into one big commit. Do NOT commit without explicit user confirmation in chat. Do NOT move to the next step without explicit confirmation.
 
 ### Code context template (before each commit)
+
+**Code written** and **What it does** are the baseline — always include them. Only add **Why it's solved this way** when there's a real constraint or design decision behind the approach, not a boilerplate line for its own sake. Only add **Related code** when the relationship is genuinely worth knowing, not just "this file imports that file." Omit either section outright rather than filling it with filler — a two-line config change doesn't need four headers.
 
 ```
 ### Step N: [step name]
@@ -54,11 +56,10 @@ Do NOT batch the whole plan into one big commit. Do NOT commit without explicit 
 **What it does:**
 [2-3 sentences. Be direct and technical — assume the reader knows the domain.]
 
-**Why it's solved this way:**
+**Why it's solved this way** (only if there's a real decision behind it):
 [1-2 sentences on the constraint or design decision that drove this approach. E.g. "This lives in the middleware because auth state is immutable by the time it reaches route handlers."]
 
-**Related code:**
-- [function/file]: [why this relationship matters]
+**Related code** (only if the relationship is genuinely worth knowing):
 - [function/file]: [why this relationship matters]
 ```
 
@@ -94,3 +95,4 @@ Run `/flow:ship-loop`.
 - Follow the plan.
 - If you think the plan is wrong, stop and ask rather than silently deviating.
 - Prefer targeted checks during implementation over rerunning the entire repo after every small step.
+- Show a compact progress line at each step transition, not a full plan reprint — reprint the full plan only if the user asks for it.

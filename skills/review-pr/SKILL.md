@@ -28,10 +28,15 @@ The agents are tool-restricted to read-only access; they cannot modify files.
 
 Synthesize the three reports into the unified output below.
 
+- Lead with one plain sentence — the actual verdict in human terms, e.g. "This is solid, one thing worth a look before merging" or "Two blockers, rest is clean." That sentence is what gets read first; the structured sections below are for whoever wants the detail.
 - Omit any section with no findings — do not pad with "N/A" or "none".
 - Always include the Quality Dashboard, Severity Counts, and Verdict.
 - Do not relabel Blocking findings as Non-blocking, and vice versa, when consolidating.
 - Do not relax the ≥80 confidence threshold during consolidation.
+
+### The gist
+
+[One plain sentence — no severity labels, no jargon, just what a colleague would say if you asked "so, how's the PR look?"]
 
 ### 🛡️ Security & Safety
 
@@ -70,3 +75,4 @@ Synthesize the three reports into the unified output below.
 - The orchestrator must not edit code; this is a read-only review.
 - Confidence threshold ≥80 is enforced inside each agent — do not relax it during consolidation.
 - Omit empty sections in the consolidated output.
+- The gist sentence comes first, before any table or section header — it's what the user actually reads.
