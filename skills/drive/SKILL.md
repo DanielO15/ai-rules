@@ -51,6 +51,8 @@ Do NOT write exhaustive sub-bullets, trace the full data flow upfront, or list e
 
 ### 3b. Work the chunks
 
+**Filter what's worth explaining at all.** Before flagging or explaining anything — a term, a value, a pattern — ask: will this come up again, or is it specific to this ticket? Core/recurring concepts (vocabulary, a pattern, an abstraction you'll hit again) are worth a brief note. One-off ticket-specific values (a literal ARN, a CIDR, a magic number) get used as given, no commentary. This is what keeps an unfamiliar-domain ticket from turning into a lecture.
+
 Hand the user one chunk at a time — not the whole step. They do the chunk, then you move to the next.
 
 For each chunk, if they ask a question, answer plainly and directly first, in your own words, the way you'd explain it out loud to someone next to you. That's the whole answer for most questions.
