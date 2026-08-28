@@ -12,12 +12,21 @@ Use the confirmed plan from this conversation. If no plan is visible and no file
 
 First, give a 2-3 sentence casual overview of what this ticket is actually about and why — plain talk, no jargon, no numbered anything yet. E.g. "We're putting the staging DB behind a private subnet so it's not reachable from the open internet anymore." This is the thing to hold in mind while everything else gets broken down.
 
-Then print the full plan as a numbered list. Then ask two quick questions before starting:
+Then print the full plan as a numbered list. Then ask three quick questions before starting:
 
 1. "For mechanical/boilerplate steps (config wiring, repetitive CRUD, etc.) — want me to just write those directly, and save the hints-only mode for steps with a real design decision?"
 2. "Want to confirm after every step, or should I keep going and only stop if I have something to flag?"
+3. "Is this domain or tool totally new to you, or a new corner of something you already know?"
 
 Record the answers and apply them for the rest of the session — don't re-ask per step. The user can always override in the moment ("give me a hint instead" / "actually stop me here").
+
+### Domain primer (only if question 3 was "totally new")
+
+Before moving to Step 2, give a plain-language primer on the domain: name the 15-20 core nouns/concepts that will actually recur — one short line each, no exhaustive detail. E.g. for a first Terraform/Spacelift ticket: "state — the file tracking what's actually deployed. resource — one infrastructure object, like an S3 bucket. module — a reusable bundle of resources. stack — Spacelift's unit of a deployed module with its own state and run history." Pick the nouns that will keep coming up, not everything the tool can do.
+
+This is a one-time vocabulary primer, separate from the ticket. It exists so later chunk-level explanations (3b) don't have to re-teach a term every time it comes up — 3b's own filter (core/recurring vs. one-off) still applies after this, it just has vocabulary to build on now instead of starting from nothing.
+
+Skip this section entirely if question 3 was "familiar territory."
 
 ## Step 2: Pre-flight checks
 
@@ -113,7 +122,8 @@ Then tell the user: "All steps done. Run `/flow:gen-tests` for any new functions
 ## Important rules
 
 - Open with a casual, plain-talk overview of the whole ticket before any numbered plan or steps
-- Set code-writing and pacing preferences once at Step 1 — don't make the user re-negotiate them every step
+- Set code-writing, pacing, and domain-familiarity preferences once at Step 1 — don't make the user re-negotiate them every step
+- If the domain is totally new, give the one-time vocabulary primer before Step 2 — not per step, not per chunk
 - Give mini-plans, not instructions — two lines, not four — the goal is understanding, not copying
 - Break each step into small chunks and hand them over one at a time — a chunk is one atomic action, smaller than a step
 - Adapt chunk size to friction: clean chunk → keep the size; a question comes up → shrink the next chunk, roughly by half. Do this silently, don't ask permission
