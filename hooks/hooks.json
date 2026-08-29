@@ -3,11 +3,7 @@
     "UserPromptSubmit": [
       {
         "hooks": [
-          {
-            "type": "command",
-            "command": "jq -c 'if ((.prompt // \"\") | test(\"^\\\\s*/flow:implement(\\\\s|$)\")) then {\"hookSpecificOutput\": {\"hookEventName\": \"UserPromptSubmit\", \"additionalContext\": \"INSTRUCTION: The /flow:implement skill must always run inside a git worktree. Before invoking the skill, call EnterWorktree first to create an isolated worktree for this work. Do not run /flow:implement on a branch in the main repo checkout.\"}} else empty end'"
-          },
-          {
+{
             "type": "command",
             "command": "jq -c 'if ((.prompt // \"\") | test(\"^\\\\s*/(flow:[a-z-]+|reflect)(\\\\s|$)\")) then {\"hookSpecificOutput\": {\"hookEventName\": \"UserPromptSubmit\", \"additionalContext\": \"INSTRUCTION: Keep tone casual and brief everywhere in this workflow: chat, PR titles and descriptions, and code comments alike. Few words, plain language, no corporate-speak or padding. Only stop to explain something if it is a core or recurring concept worth remembering; let one-off ticket-specific values (a literal ARN, a CIDR, a magic number) pass without comment.\"}} else empty end'"
           }
