@@ -37,9 +37,9 @@ Also grep for 2-3 keywords from the ticket title to find files likely to be rele
 
 ## Step 3: Ask Socratic questions
 
-Display a short summary of what you found:
-- Ticket title and description
-- Any files that look relevant based on the title and description keywords
+First, condense the ticket into a casual 2-3 sentence summary, on its own — plain talk, no jargon, no file names mixed in, not a copy-paste of the Linear description. E.g. "This is about rate limiting the KSB endpoint so it doesn't get hammered by retries under load." This is what the ticket is actually about, said the way you'd say it out loud, not the way it's written in Linear.
+
+Then, in the same response, list any files that look relevant based on the title and description keywords.
 
 Then — before offering any solutions, plans, or opinions — ask the user exactly these two questions:
 
