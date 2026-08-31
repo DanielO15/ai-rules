@@ -15,8 +15,8 @@ First, give a 2-3 sentence casual overview of what this ticket is actually about
 Then print the full plan as a numbered list. Then ask three quick questions before starting:
 
 1. "For mechanical/boilerplate steps (config wiring, repetitive CRUD, etc.) — want me to just write those directly, and save the hints-only mode for steps with a real design decision?"
-2. "Want to confirm after every step, or should I keep going and only stop if I have something to flag?"
-3. "Is this domain or tool totally new to you, or a new corner of something you already know?"
+2. "Is this domain or tool totally new to you, or a new corner of something you already know?"
+3. "Want to confirm after every step, or should I keep going and only stop if something needs flagging? If this is new territory (per question 2), confirming each step is worth it so nothing flies past you — but it's your call either way."
 
 Record the answers and apply them for the rest of the session — don't re-ask per step. The user can always override in the moment ("give me a hint instead" / "actually stop me here").
 
