@@ -37,9 +37,13 @@ Also grep for 2-3 keywords from the ticket title to find files likely to be rele
 
 ## Step 3: Ask Socratic questions
 
-First, condense the ticket into a casual summary, on its own — one sentence if you can, two at the absolute most. Plain talk, no jargon, no file names mixed in, not a copy-paste of the Linear description. E.g. "This is about rate limiting the KSB endpoint so it doesn't get hammered by retries under load." This is what the ticket is actually about, said the way you'd say it out loud, not the way it's written in Linear.
+Structure this response under headings — do not let it run together as one block of prose.
 
-Then, in the same response, list any files that look relevant based on the title and description keywords.
+**TL;DR**
+Condense the ticket into a casual summary — one sentence if you can, two at the absolute most. Plain talk, no jargon, no file names mixed in, not a copy-paste of the Linear description. E.g. "This is about rate limiting the KSB endpoint so it doesn't get hammered by retries under load." This is what the ticket is actually about, said the way you'd say it out loud, not the way it's written in Linear.
+
+**Files**
+List any files that look relevant based on the title and description keywords.
 
 Then — before offering any solutions, plans, or opinions — ask the user exactly these two questions:
 
@@ -50,25 +54,31 @@ Do NOT suggest a plan, write code, or explain how to solve it. Stop and wait for
 
 ## Step 4: Convert answers into a draft plan
 
-Take the user's answers and do the following in one response:
+Take the user's answers and respond under headings — never let the plan, notes, and recommendation blur into one wall of text. The recommendation especially must stand on its own; it's the part most likely to get lost otherwise.
 
-1. Validate or gently correct their approach based on the actual codebase
-2. Point to specific files/patterns they should follow
-3. Flag any gotchas — naming conventions, existing abstractions, anything that will bite them. Only flag things worth remembering (core/recurring concepts); skip commentary on one-off ticket-specific values
-4. Using their answers as the basis, produce a draft implementation plan as a numbered list — do not ask them to write one themselves, their answers already contain it
+**Notes**
+- Validate or gently correct their approach based on the actual codebase
+- Point to specific files/patterns they should follow
+- Flag any gotchas — naming conventions, existing abstractions, anything that will bite them. Only flag things worth remembering (core/recurring concepts); skip commentary on one-off ticket-specific values
 
-Keep the plan concrete: each step should be a single actionable thing (e.g. "Add X to Y file", "Update Z function to handle Q"). Aim for 4–7 steps.
+Skip the Notes heading entirely if there's nothing worth saying under it — don't pad it out for symmetry.
+
+**Plan**
+Using their answers as the basis, produce a draft implementation plan as a numbered list — do not ask them to write one themselves, their answers already contain it. Keep it concrete: each step should be a single actionable thing (e.g. "Add X to Y file", "Update Z function to handle Q"). Aim for 4–7 steps.
 
 Then ask: "Does this look right? Adjust anything before we start implementing."
 
-Wait for confirmation or adjustments. If they change something, reprint the updated plan.
+Wait for confirmation or adjustments. If they change something, reprint the updated plan under the **Plan** heading.
 
-Once confirmed, recommend an execution mode based on the uncertainty answer from Step 3 and the priority/labels from Step 1:
+Once confirmed, give the recommendation its own heading and nothing else in that block:
 
-- Uncertain part points to new territory (a domain, tool, or platform not worked in before) or the ticket is high blast-radius (prod, IAM, auth, data migrations, high-priority label) → recommend `/flow:drive`
-- Otherwise (familiar domain, low blast-radius) → recommend `/flow:implement`
+**Recommendation**
+Based on the uncertainty answer from Step 3 and the priority/labels from Step 1:
 
-Say which and why in one line — e.g. "This sounds like new territory (first Spacelift stack) — I'd suggest `/flow:drive` so it actually sticks" or "Familiar ground, low stakes — `/flow:implement` when you're ready." Do not recommend both or leave it open-ended.
+- Uncertain part points to new territory (a domain, tool, or platform not worked in before) or the ticket is high blast-radius (prod, IAM, auth, data migrations, high-priority label) → `/flow:drive`
+- Otherwise (familiar domain, low blast-radius) → `/flow:implement`
+
+State the command and one line of why — e.g. "`/flow:drive` — first Spacelift stack, this needs to actually stick" or "`/flow:implement` — familiar ground, low stakes." Do not recommend both or leave it open-ended.
 
 Do NOT ask the user to write a plan — derive it from their answers. Do NOT save to a file or create an artifact. Keep everything in this chat.
 
@@ -77,5 +87,6 @@ Do NOT ask the user to write a plan — derive it from their answers. Do NOT sav
 - Do NOT write code in this skill
 - Do NOT ask the user to write a plan — build it from their answers in Step 3
 - Do NOT create artifacts, open files, or save plans — chat only
+- Use headings (TL;DR, Files, Notes, Plan, Recommendation, any other heading that maybe be relevant) — never let these blur into one wall of text. The Recommendation heading in particular must stand alone, not share a paragraph with anything else
 - Ask the two questions in Step 3 and WAIT for answers before proceeding to Step 4
 - If the user skips the questions and asks you to just build it, say: "What's your rough approach?" and wait
