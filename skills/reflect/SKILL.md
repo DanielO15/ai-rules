@@ -16,24 +16,37 @@ Read back through this conversation and note:
 - Any mistakes, wrong turns, or things that took longer than expected
 - What the plan was and whether reality matched it
 - If the session used `/flow:drive`, how each step was broken into chunks — the lowest level things got split to, which chunks needed re-splitting (a friction signal — the user had a question), and how the recap stitched them back together. A step with real friction and a clean recap is exactly the material reflection wants: it shows the gap between "broken down" and "understood."
+- Check `~/.claude/skill-gaps.md` if it exists — a tag that matches something from this ticket is a strong signal for what to prioritize in Step 2
 
-Also check for a plan file in `.claude/plans/` — read it if one exists.
+The plan itself lives in this conversation, from `/flow:orient` — no separate file to go looking for. Only check `.claude/plans/` if `/flow:plan-review` happened to run this session.
 
-## Step 2: Generate targeted questions
+Then, before asking anything, show the **Story of the PR**: honest chronological bullets of what actually happened, in the order it happened. No filtering for core-vs-one-off here — this is a recap of the user's own arc, not a teaching moment, so every real beat earns a line. E.g.:
 
-Based on what you found in Step 1, generate 3–5 questions that are specific to this ticket. Not generic questions — questions that would only make sense for what actually happened in this session.
+- Started by tracing why retries were hammering the endpoint
+- Landed on a token-bucket approach after ruling out a queue
+- First time writing a custom Phoenix plug
+- Hit a snag with the plug's assign order — fixed by moving the check earlier
+
+This re-orients the user on the whole ticket before Step 2's specific questions. Tickets can span days — a bare callback to something from three days ago won't land without this first.
+
+## Step 2: Ask one at a time, grounded in a recap
+
+Based on Step 1, identify the angles worth asking about — not generic ones, only questions that would make sense given what actually happened in this session.
+
+Ask ONE question at a time — never a batch. Before each question, give a brief concrete recap of the specific moment it's about: what happened, what the code or decision actually was. Do not assume recall — a bare callback like "remember when you were confused about the middleware?" doesn't work when that was three days and two tickets ago. Ground the question in enough detail that the user can answer fresh off the reminder, not from memory alone.
 
 Examples:
-- If the user was confused about how the auth middleware works: "You weren't sure how the middleware chain worked when you started — how would you explain it now?"
-- If a plan step had to be revised: "The plan changed when you hit X — what did that tell you about how you'd approached the problem?"
-- If a new pattern or library was used: "You hadn't used Y before — what's your mental model of it now?"
-- If a step's chunks had to shrink partway through: "Step 3 started as one chunk but split into three once you hit the IAM policy piece — what made that harder to reason about at the first size, and how would you explain it now that it's built back up into the full step?"
+- "Back on day one, you weren't sure how the middleware chain handled auth — specifically whether the token check ran before or after the rate limiter. Now that it's done, how would you explain the order to someone else?"
+- "The plan called for a queue, but you switched to a token bucket once X came up — what did that tell you about how you'd first approached the problem?"
+- "Step 3 started as one chunk but split into three once you hit the IAM policy piece — what made that harder to reason about at the first size, and how would you explain it now that it's built back up into the full step?"
 
-If a step had chunk friction, that step outranks other candidates for a question — ask about its rebuild (chunk → friction → recap → step) before moving on to less-friction-y material.
+Wait for the answer before asking the next question. Let each answer shape what comes next — skip a planned angle if the answer already covered it, or follow up deeper on something that opened up instead of moving mechanically to the next one.
 
-Do NOT ask generic questions like "what did you learn?" unless nothing more specific applies.
+Priority order when picking what to ask about first: a skill-gaps tracker match, then chunk friction from `/flow:drive`, then everything else. Ask about the highest-priority angle first.
 
-Show the questions and wait for answers. Tell them: "Take a few minutes — these go into your learning journal and your promotion case."
+Stop when the genuinely useful ground is covered — do not pad to hit a target number of questions, and do not ask generic ones like "what did you learn?" unless nothing more specific applies.
+
+Tell the user upfront, before the first question: "Let's go through a few things one at a time — these go into your learning journal and your promotion case."
 
 ## Step 3: Write the Google Doc entry
 
@@ -87,6 +100,8 @@ Then ask: "Anything else worth noting before you close this out?"
 ## Important rules
 
 - Questions must be derived from this specific session — not generic
+- Show the Story of the PR (honest chronology, no filtering) before asking anything
+- Ask one question at a time, never a batch — each one grounded in a concrete recap of the specific moment, since tickets can span days and recall fades
 - Wait for answers before writing the doc
 - The Impact line must be outcome-framed — push back if the user gives you a task description
 - Do NOT summarise the whole conversation unprompted — only surface what's genuinely useful for reflection
