@@ -96,3 +96,27 @@ gh pr create --draft --title "<Generated Title>" --body "<Generated Body>"
 ```
 
 Do not add assignees or labels.
+
+## Step 6: Skill-gap check (silent unless a pattern repeats)
+
+This happens after the PR exists — it never blocks or delays PR creation.
+
+1. Look back over this ticket's actual work (not the PR metadata) for one genuine friction point — something that was actually hard, not routine. Most tickets: nothing found. Stop here, no output, no file write.
+2. If there's a real one, condense it to a short category tag — e.g. "Elixir pattern matching in `with` blocks", "Terraform IAM policies" — not a narrative, not this ticket's specific details.
+3. Read `~/.claude/skill-gaps.md` (create it with just a header line if it doesn't exist yet). Judge whether this tag matches an existing entry by category, not exact wording — "Elixir `with` blocks" and "Elixir pattern matching in guards" are the same underlying gap.
+4. Append one line, silently:
+   ```
+   <date> | <ticket ID or branch name> | <repo name> | <tag>
+   ```
+5. If this tag has now appeared 3 or more times total (including this one) and hasn't been marked resolved, surface ONE line in chat, after everything else in this response, with the specific past occurrences as receipts:
+
+   > "3rd time `<tag>` has come up — `<ticket 1>`, `<ticket 2>`, `<ticket 3>`. Worth a deliberate pass — run `/flow:study <tag>` when you've got space for it, ideally in a fresh session."
+
+   Otherwise (1st or 2nd occurrence, or already marked resolved) — stay completely silent about this step. Do not mention that a check happened at all.
+
+## Important rules
+
+- Do not add assignees or labels to the PR
+- Step 6 never blocks, delays, or gates PR creation — it happens strictly after
+- Step 6 writes to the tracker silently, no confirmation needed — it's a lightweight private log, not a meaningful artifact like `/reflect`'s or `/flow:study`'s journal entries
+- Only surface a chat message from Step 6 on the 3rd+ occurrence of the same tag — 1st and 2nd occurrences, and anything already marked resolved, produce zero visible output
